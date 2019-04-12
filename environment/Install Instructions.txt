@@ -1,0 +1,2 @@
+To install the environment, run this command in Terminal (macOS):
+conda env create -f only_np.yml
