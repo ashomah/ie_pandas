@@ -1,8 +1,4 @@
-def sum_numbers(a,b):
-    return(a + b)
+from ie_pandas import DataFrame
 
-def tokenize(sentence, lower=False):
-    if lower == True:
-        return(sentence.lower().split())
-    else:
-        return(sentence.split())
+def haha():
+    return ('haha is printed')
