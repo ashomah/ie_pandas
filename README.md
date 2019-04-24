@@ -14,4 +14,6 @@ Once the environment installed in Anaconda, it should be activated with `conda a
 
 To install the package, navigate to the directory *ie_pandas* with `cd`, then run `pip install --editable .`. Check if the package has been installed using `conda list`.  
 
+To re-install the package, use `pip install -e .`.
+
 To import the package in Python, use `from ie_pandas.DataFrame import *`.  
