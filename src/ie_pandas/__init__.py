@@ -6,17 +6,17 @@ class DataFrame:
         self.input_object = input_object
         # self.input_object = to_array(self.input_object)
 
-        if type(input_object) = 'list':
+        if type(input_object) == list:
             mylist = input_object
             count_elements = len(mylist)
 
             # Check if elements of mylist are lists
             only_lists = True
             for i in range(0, count_elements):
-                if type(mylist[i]) != 'list':
+                if type(mylist[i]) != list:
                     only_lists = False
             
-            if only_lists = False:
+            if only_lists == False:
                 raise Exception("Only list of lists is accepted for now...")
             else:
                 # Check each list has the same number of elements
@@ -30,7 +30,7 @@ class DataFrame:
                     #my_dict = dict(zip<(colindex, my_list)
                 
         else:
-            raise Exception("The iunput should be a list.")
+            raise Exception(f"The input should be a list. Now, it is a {type(input_object)}")
 
 
 
