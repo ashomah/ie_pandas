@@ -24,9 +24,11 @@ class DataFrame:
                     if len(mylist[0]) != len(mylist[i]):
                         raise Exception("Your lists don't have the same number of elements!")
                     else:
-                        #CREATE DICTIONARY !
+                    	if colindex = True:
+                    	my_dict = dict(zip(colindex, my_list)
+                    	else: colindex = range(1, count_elements+1)
+                    #my_dict = dict(zip<(colindex, my_list)
                 
-
         else:
             raise Exception("The iunput should be a list.")
 
