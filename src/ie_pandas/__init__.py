@@ -3,7 +3,7 @@ class DataFrame:
     import numpy as np
 
     def __init__(self, input_object, colindex = '', rowindex = ''):
-        self.input_object = input_object
+        self.df = input_object
         # self.input_object = to_array(self.input_object)
 
         if type(input_object) == list:
@@ -23,19 +23,38 @@ class DataFrame:
                 for i in range(0, count_elements):
                     if len(mylist[0]) != len(mylist[i]):
                         raise Exception("Your lists don't have the same number of elements!")
-                    else:
-                    	if colindex = True:
-                    	my_dict = dict(zip(colindex, my_list)
-                    	else: colindex = range(1, count_elements+1)
-                    #my_dict = dict(zip<(colindex, my_list)
-                
+
+                if colindex == '':
+                    colindex = range(0, count_elements)
+                else:
+                    if len(colindex) != count_elements:
+                        raise Exception("Not enough column names !")
+
+                my_dict = dict(zip(colindex, mylist))
+                my_dict['colindex'] = list(colindex)
+                self.df = my_dict
         else:
-            raise Exception(f"The input should be a list. Now, it is a {type(input_object)}")
+            raise Exception(f"The input should be a list. Now, it is a {type(self.df)}")
 
 
+    def __setitem__(self, key, value):
+        self.df[key] = value
+
+    def __getitem__(self, key):
+        return self.df[key]
 
     def __repr__(self):
-        return f"This is {self.input_object}"
+        list_col = self.df['colindex']
+        n_print = { key:value for key,value in self.df.items() if key in list_col}
+        return f"This is {self.df}." + \
+            "\n\n" + \
+            f"It is a {type(self.df)}" + \
+            "\n\n" + \
+            f"{n_print}"
+    
+    def nice_print(self, list_col):
+        n_print = { key:value for key,value in self.df.items() if key in list_col}
+        return n_print
 
 # def to_array(obj):
 #     """
