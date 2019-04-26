@@ -22,6 +22,11 @@ class DataFrame:
             if only_lists == False:
                 raise Exception("Only list of lists is accepted for now...")
             else:
+                # Check if each element contains consistent data types
+                for i in range(0, count_elements):
+                    if all(isinstance(j, type(mylist[i][0])) for j in mylist[i]) == False:
+                        raise Exception("Data types should be consistent within each column.")
+                        
                 # Check each list has the same number of elements
                 for i in range(0, count_elements):
                     if count_records_first_element != len(mylist[i]):
