@@ -4,6 +4,7 @@ class DataFrame:
 
     def __init__(self, input_object, colindex = '', rowindex = ''):
         self.df = input_object
+        self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
 
         if type(input_object) == list:
@@ -46,15 +47,22 @@ class DataFrame:
     def __repr__(self):
         list_col = self.df['colindex']
         n_print = { key:value for key,value in self.df.items() if key in list_col}
-        return f"This is {self.df}." + \
+        return f"{n_print}" + \
             "\n\n" + \
-            f"It is a {type(self.df)}" + \
+            f"It is a {type(self.df).__name__}." + \
             "\n\n" + \
-            f"{n_print}"
+            f"Full content:" + "\n" + \
+            f"{self.df}."
     
-    def nice_print(self, list_col):
-        n_print = { key:value for key,value in self.df.items() if key in list_col}
-        return n_print
+    # @staticmethod
+    # def nice_print ():
+    #     list_col = self.df['colindex']
+    #     n_print = { key:value for key,value in self.df.items() if key in list_col}
+    #     return f"{n_print}"
+
+    # def pretty(self, list_col):
+    #     n_print = {key:value for key,value in self.df.items() if key in list_col}
+    #     return n_print
 
 # def to_array(obj):
 #     """
