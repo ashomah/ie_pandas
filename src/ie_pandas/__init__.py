@@ -93,8 +93,8 @@ class DataFrame:
                         raise Exception(f"Not the right number of column names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
 
                 my_dict = dict(zip(colindex, mylist))
-                my_dict['colindex'] = list(colindex)
-                my_dict['rowindex'] = list(rowindex)
+                self.colindex = list(colindex)
+                self.rowindex = list(rowindex)
                 self.df = my_dict
         else:
             raise Exception(f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(self.df)}")
@@ -109,7 +109,7 @@ class DataFrame:
 
     # To print the df
     def __repr__(self):
-        list_col = self.df['colindex']
+        list_col = self.colindex
         n_print = { key:value for key,value in self.df.items() if key in list_col}
         return f"{n_print}" + \
             "\n\n" + \
