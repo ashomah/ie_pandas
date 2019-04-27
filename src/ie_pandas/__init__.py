@@ -1,28 +1,48 @@
 class DataFrame:
 
-    import numpy as np
-
-    def __init__(self, input_object, colindex = '', rowindex = ''):
+    def __init__(self, input_object, colindex = '', rowindex = '', axis = 0):
+        '''
+        input_object: can be a list, a list of lists, a dictionary, a numpy array.
+        colindex: should be a list of column names.
+        rowindex: should be a list of row names.
+        axis: 0 if input_object contains data by column (default). 1 if input_object contains data by row.
+        '''
+        import numpy as np
         self.df = input_object
         # self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
 
         # Pre-convert the df
-        def to_df(obj):
+        def to_df(obj, axis):
             if str(type(obj)) == "<class 'numpy.ndarray'>":
-                return [obj.tolist()[0], obj[1:].T.tolist()]
+                if axis == 0:
+                    return obj.tolist()
+                else:
+                    return obj.T.tolist()
             elif type(obj) == list and obj[0] == [int or str or float]:
-                return [np.array(obj).tolist()[0], np.array(obj[1:]).T.tolist()]
+                if axis == 0:
+                    return np.array(obj).tolist()
+                else:
+                    return np.array(obj).T.tolist()
             elif type(obj) == dict:
-                return [dict_to_array(obj).tolist()[0], dict_to_array(obj)[1:].T.tolist()]
+                if axis == 0:
+                    return dict_to_array(obj).tolist()
+                else:
+                    return dict_to_array(obj).T.tolist()
             elif type(obj) == list and obj[0] == list:
                 for lst in range(obj-1):
                     if len(obj[lst]) == len(obj[lst+1]):
-                        return [np.array(obj).tolist()[0], np.array(obj[1:]).T.tolist()]
+                        if axis == 0:
+                            return np.array(obj).tolist()
+                        else:
+                            return np.array(obj).T.tolist()
             else:
-                return obj
+                if axis == 0:
+                    return obj
+                else:
+                    return np.array(obj).T.tolist()
 
-        self.df = to_df(self.df)
+        self.df = to_df(self.df, axis)
 
         # Check if the input_object if a list
         if type(self.df) == list:
@@ -42,6 +62,12 @@ class DataFrame:
             if only_lists == False:
                 raise Exception("Only list of lists is accepted for now...")
             else:
+                # Check if each element is int, float, bool or string
+                for i in range(0, count_elements):
+                    if all(isinstance(j, (int, float, bool, str)) for j in mylist[i]) == False:
+                        print(type(mylist[i]))
+                        raise Exception("Data types should be integer, float, boolean or string.")
+                        
                 # Check if each element contains consistent data types
                 for i in range(0, count_elements):
                     if all(isinstance(j, type(mylist[i][0])) for j in mylist[i]) == False:
