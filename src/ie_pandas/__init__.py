@@ -7,15 +7,35 @@ class DataFrame:
         # self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
 
+        # Pre-convert the df
+        def to_df(obj):
+            if str(type(obj)) == "<class 'numpy.ndarray'>":
+                return [obj.tolist()[0], obj[1:].T.tolist()]
+            elif type(obj) == list and obj[0] == [int or str or float]:
+                return [np.array(obj).tolist()[0], np.array(obj[1:]).T.tolist()]
+            elif type(obj) == dict:
+                return [dict_to_array(obj).tolist()[0], dict_to_array(obj)[1:].T.tolist()]
+            elif type(obj) == list and obj[0] == list:
+                for lst in range(obj-1):
+                    if len(obj[lst]) == len(obj[lst+1]):
+                        return [np.array(obj).tolist()[0], np.array(obj[1:]).T.tolist()]
+            else:
+                return obj
+
+        self.df = to_df(self.df)
+
         # Check if the input_object if a list
-        if type(input_object) == list:
-            mylist = input_object
+        if type(self.df) == list:
+            mylist = self.df
             count_elements = len(mylist)
             count_records_first_element = len(mylist[0])
 
             # Check if elements of mylist are lists
             only_lists = True
+            print(type(mylist))
+            print(mylist)
             for i in range(0, count_elements):
+                print(i,":",type(mylist[i]))
                 if type(mylist[i]) != list:
                     only_lists = False
             
@@ -51,8 +71,7 @@ class DataFrame:
                 my_dict['rowindex'] = list(rowindex)
                 self.df = my_dict
         else:
-            raise Exception(f"The input should be a list. Now, it is a {type(self.df)}")
-
+            raise Exception(f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(self.df)}")
 
     # To modify the content of the df
     def __setitem__(self, key, value):
