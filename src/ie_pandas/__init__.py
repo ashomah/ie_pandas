@@ -52,10 +52,7 @@ class DataFrame:
 
             # Check if elements of mylist are lists
             only_lists = True
-            print(type(mylist))
-            print(mylist)
             for i in range(0, count_elements):
-                print(i,":",type(mylist[i]))
                 if type(mylist[i]) != list:
                     only_lists = False
             
@@ -101,11 +98,20 @@ class DataFrame:
 
     # To modify the content of the df
     def __setitem__(self, key, value):
-        self.df[key] = value
+        self.df[key] = value    # SHOULD BE MODIFIED TO CHECK IF THE KEY IS IN COLINDEX
 
     # To get the content of the df
     def __getitem__(self, key):
-        return self.df[key]
+        return self.df[key]     # SHOULD BE MODIFIED TO CHECK IF THE KEY IS IN COLINDEX
+
+    # To get the content of one row
+    def get_row(self, index):
+        if isinstance(index, int) == False:
+            raise Exception(f"The index should be an integer.")
+        elif (index > len(self.df[self.colindex[0]])) | index < 0:
+            raise Exception(f"The index is out of range. It should be positive and smaller than {len(self.df[self.colindex[0]])}")
+        else:
+            return [self.df[i][index] for i in self.colindex]
 
     # To print the df
     def __repr__(self):
