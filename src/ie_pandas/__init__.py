@@ -24,33 +24,13 @@ class DataFrame:
             # From dictionary of lists
             if type(list(dic.items())[0][1]) == list:
                 arr_dic = np.array(list(dic.items()))
+                cols = []
                 ls = []
                 for i in arr_dic:
                     for j in i:
                         if type(j) != list:
-                            ls.append(j)
+                            cols.append(j)
                         elif type(j) == list:
-                            for k in j:
-                                ls.append(k)
-                ls2 = []
-                for item in range(int((len(ls) / len(arr_dic)))):
-                    counter = 0
-                    for ii in range(int(len(arr_dic))):
-                        ls2.append(ls[item + counter])
-                        counter += int((arr_dic.itemsize / 2) + 1)
-                return np.reshape(
-                    np.array(ls2), ((int(arr_dic.itemsize / 2) + 1, len(arr_dic)))
-                )
-
-            # From dictionary of numpy arrays
-            elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
-                arr_dic = np.array(list(my_dict.items()))
-                ls = []
-                for i in arr_dic:
-                    for j in i:
-                        if str(type(j)) != "<class 'numpy.ndarray'>":
-                            ls.append(j)
-                        elif str(type(j)) == "<class 'numpy.ndarray'>":
                             for k in j:
                                 ls.append(k)
                 ls2 = []
@@ -61,38 +41,63 @@ class DataFrame:
                         counter += int((arr_dic.itemsize / 2))
                 return np.reshape(
                     np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
-                )
+                ), cols
+
+            # From dictionary of numpy arrays
+            elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
+                arr_dic = np.array(list(my_dict.items()))
+                cols = []
+                ls = []
+                for i in arr_dic:
+                    for j in i:
+                        if str(type(j)) != "<class 'numpy.ndarray'>":
+                            cols.append(j)
+                        elif str(type(j)) == "<class 'numpy.ndarray'>":
+                            for k in j:
+                                ls.append(k)
+                ls2 = []
+                for item in range(int((len(ls) / len(arr_dic)))):
+                    counter = 0
+                    for ii in range(int(len(arr_dic))):
+                        ls2.append(ls[item + counter])
+                        counter += int((arr_dic.itemsize / 2))
+                return cols, np.reshape(
+                    np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
+                ), cols
 
         def to_df(obj, axis):
+            cols = ""
             if str(type(obj)) == "<class 'numpy.ndarray'>":
                 if axis == 0:
-                    return obj.tolist()
+                    return obj.tolist(), cols
                 else:
-                    return obj.T.tolist()
+                    return obj.T.tolist(), cols
             elif type(obj) == list and obj[0] == [int or str or float]:
                 if axis == 0:
-                    return np.array(obj).tolist()
+                    return np.array(obj).tolist(), cols
                 else:
-                    return np.array(obj).T.tolist()
+                    return np.array(obj).T.tolist(), cols
             elif type(obj) == dict:
                 if axis == 0:
-                    return dict_to_array(obj).tolist()
+                    array_n_cols = dict_to_array(obj)
+                    return array_n_cols[0].T.tolist(), array_n_cols[1]
                 else:
-                    return dict_to_array(obj).T.tolist()
+                    array_n_cols = dict_to_array(obj)
+                    return array_n_cols[0].tolist(), array_n_cols[1]
             elif type(obj) == list and obj[0] == list:
                 for lst in range(obj-1):
                     if len(obj[lst]) == len(obj[lst+1]):
                         if axis == 0:
-                            return np.array(obj).tolist()
+                            return np.array(obj).tolist(), cols
                         else:
-                            return np.array(obj).T.tolist()
+                            return np.array(obj).T.tolist(), cols
             else:
                 if axis == 0:
-                    return obj
+                    return obj, cols
                 else:
-                    return np.array(obj).T.tolist()
+                    return np.array(obj).T.tolist(), cols
 
-        self.df = to_df(self.df, axis)
+        self.df, dict_cols = to_df(self.df, axis)
 
         #########################################################
         # CONFIGURATE THE DATAFRAME
@@ -130,8 +135,10 @@ class DataFrame:
                         raise Exception("Your lists don't have the same number of elements!")
 
                 # Apply the column index
-                if colindex == '':
+                if (colindex == '') & (dict_cols == ''):
                     colindex = range(0, count_elements)
+                elif (colindex == '') & (dict_cols != ''):
+                    colindex = dict_cols
                 else:
                     if len(colindex) != count_elements:
                         raise Exception(f"Not the right number of column names ! It shoul be {count_elements}, but it is {len(colindex)}.")
@@ -141,7 +148,7 @@ class DataFrame:
                     rowindex = range(0, count_records_first_element)
                 else:
                     if len(rowindex) != count_records_first_element:
-                        raise Exception(f"Not the right number of column names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
+                        raise Exception(f"Not the right number of row names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
 
                 my_dict = dict(zip(colindex, mylist))
                 self.colindex = list(colindex)
@@ -176,9 +183,22 @@ class DataFrame:
     # To print the df
     def __repr__(self):
         import numpy as np
-        n_print = { key:value for key,value in self.df.items() if key in self.colindex}
-        return f"This is a {type(self.df).__name__}." + "\n" + \
-            f"{n_print}"
+        n_print = ""
+        first = 1
+        for key in self.colindex:
+            for i in range(len(list(self.df.items()))):
+                if key == list(self.df.items())[i][0]:
+                    if first == 1:
+                        first = 0
+                        n_print = f"{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}" 
+                    else:
+                        n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
+        return f"{n_print}"
+
+    # def __repr__(self):
+    #     import numpy as np
+    #     n_print = { key:value for key,value in self.df.items() if key in self.colindex}
+    #     return f"{n_print}"
 
     # @staticmethod
     # def nice_print ():
