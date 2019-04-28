@@ -136,7 +136,7 @@ class DataFrame:
 
                 # Apply the column index
                 if (colindex == '') & (dict_cols == ''):
-                    colindex = range(0, count_elements)
+                    colindex = list(map(str, range(0, count_elements)))
                 elif (colindex == '') & (dict_cols != ''):
                     colindex = dict_cols
                 else:
@@ -145,7 +145,7 @@ class DataFrame:
 
                 # Apply the row index
                 if rowindex == '':
-                    rowindex = range(0, count_records_first_element)
+                    rowindex = list(map(str, range(0, count_records_first_element)))
                 else:
                     if len(rowindex) != count_records_first_element:
                         raise Exception(f"Not the right number of row names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
@@ -185,6 +185,34 @@ class DataFrame:
         import numpy as np
         n_print = ""
         first = 1
+        max_len_rowindex = len(max(self.rowindex, key=len))
+        max_len_colindex = []
+        df_data = np.array(list(self.df.values()))
+
+        # ls = []
+        # for i in df_data:
+        #     for j in i:
+        #         ls.append(j)
+        # max_len_data = len(max(ls, key=len))
+        # print(ls)
+
+        new_print = f"{'':<{max_len_rowindex}}"
+        for c in self.colindex:
+            max_col = len(max(list(map(str, self.df[c])), key=len))
+            if max_col > len(c):
+                max_len_colindex.append(max_col)
+            else:
+                max_len_colindex.append(len(c))
+            new_print += f"  {c:>{max_len_colindex[self.colindex.index(c)]}}"
+        for r in self.rowindex:
+            new_print += f"\n{r:<{max_len_rowindex}}"
+            for c in self.colindex:
+                new_print += f"  {str(self.df[c][self.rowindex.index(r)]):>{max_len_colindex[self.colindex.index(c)]}}"
+
+        # print(new_print)
+        return new_print
+        # for i in self.colindex
+
         for key in self.colindex:
             for i in range(len(list(self.df.items()))):
                 if key == list(self.df.items())[i][0]:
@@ -194,6 +222,20 @@ class DataFrame:
                     else:
                         n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
         return f"{n_print}"
+
+    # def __repr__(self):
+    #     import numpy as np
+    #     n_print = ""
+    #     first = 1
+    #     for key in self.colindex:
+    #         for i in range(len(list(self.df.items()))):
+    #             if key == list(self.df.items())[i][0]:
+    #                 if first == 1:
+    #                     first = 0
+    #                     n_print = f"{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}" 
+    #                 else:
+    #                     n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
+    #     return f"{n_print}"
 
     # def __repr__(self):
     #     import numpy as np
