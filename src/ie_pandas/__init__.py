@@ -12,7 +12,57 @@ class DataFrame:
         # self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
 
-        # Pre-convert the df
+        #########################################################
+        # PRE-CONVERT THE DF
+        #########################################################
+
+        def dict_to_array(dic):
+            """
+            Function to convert dictionaries to numpy arrays
+            """
+
+            # From dictionary of lists
+            if type(list(dic.items())[0][1]) == list:
+                arr_dic = np.array(list(dic.items()))
+                ls = []
+                for i in arr_dic:
+                    for j in i:
+                        if type(j) != list:
+                            ls.append(j)
+                        elif type(j) == list:
+                            for k in j:
+                                ls.append(k)
+                ls2 = []
+                for item in range(int((len(ls) / len(arr_dic)))):
+                    counter = 0
+                    for ii in range(int(len(arr_dic))):
+                        ls2.append(ls[item + counter])
+                        counter += int((arr_dic.itemsize / 2) + 1)
+                return np.reshape(
+                    np.array(ls2), ((int(arr_dic.itemsize / 2) + 1, len(arr_dic)))
+                )
+
+            # From dictionary of numpy arrays
+            elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
+                arr_dic = np.array(list(my_dict.items()))
+                ls = []
+                for i in arr_dic:
+                    for j in i:
+                        if str(type(j)) != "<class 'numpy.ndarray'>":
+                            ls.append(j)
+                        elif str(type(j)) == "<class 'numpy.ndarray'>":
+                            for k in j:
+                                ls.append(k)
+                ls2 = []
+                for item in range(int((len(ls) / len(arr_dic)))):
+                    counter = 0
+                    for ii in range(int(len(arr_dic))):
+                        ls2.append(ls[item + counter])
+                        counter += int((arr_dic.itemsize / 2))
+                return np.reshape(
+                    np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
+                )
+
         def to_df(obj, axis):
             if str(type(obj)) == "<class 'numpy.ndarray'>":
                 if axis == 0:
@@ -43,6 +93,10 @@ class DataFrame:
                     return np.array(obj).T.tolist()
 
         self.df = to_df(self.df, axis)
+
+        #########################################################
+        # CONFIGURATE THE DATAFRAME
+        #########################################################
 
         # Check if the input_object if a list
         if type(self.df) == list:
@@ -152,53 +206,5 @@ class DataFrame:
 #             if len(obj[lst]) == len(obj[lst + 1]):
 #                 return np.array(obj)
      
-
-# def dict_to_array(dic):
-#     """
-#     Function to convert dictionaries to numpy arrays
-#     """
-
-#     # From dictionary of lists
-#     if type(list(dic.items())[0][1]) == list:
-#         arr_dic = np.array(list(dic.items()))
-#         ls = []
-#         for i in arr_dic:
-#             for j in i:
-#                 if type(j) != list:
-#                     ls.append(j)
-#                 elif type(j) == list:
-#                     for k in j:
-#                         ls.append(k)
-#         ls2 = []
-#         for item in range(int((len(ls) / len(arr_dic)))):
-#             counter = 0
-#             for ii in range(int(len(arr_dic))):
-#                 ls2.append(ls[item + counter])
-#                 counter += int((arr_dic.itemsize / 2) + 1)
-#         return np.reshape(
-#             np.array(ls2), ((int(arr_dic.itemsize / 2) + 1, len(arr_dic)))
-#         )
-
-#     # From dictionary of numpy arrays
-#     elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
-#         arr_dic = np.array(list(my_dict.items()))
-#         ls = []
-#         for i in arr_dic:
-#             for j in i:
-#                 if str(type(j)) != "<class 'numpy.ndarray'>":
-#                     ls.append(j)
-#                 elif str(type(j)) == "<class 'numpy.ndarray'>":
-#                     for k in j:
-#                         ls.append(k)
-#         ls2 = []
-#         for item in range(int((len(ls) / len(arr_dic)))):
-#             counter = 0
-#             for ii in range(int(len(arr_dic))):
-#                 ls2.append(ls[item + counter])
-#                 counter += int((arr_dic.itemsize / 2))
-#         return np.reshape(
-#             np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
-#         )
-
 # To indicate the script has been run when importing the package
 print("Done __init__.py")
