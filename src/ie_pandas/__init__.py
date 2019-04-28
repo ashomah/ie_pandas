@@ -1,15 +1,52 @@
 class DataFrame:
 
-    import numpy as np
-
-    def __init__(self, input_object, colindex = '', rowindex = ''):
+    def __init__(self, input_object, colindex = '', rowindex = '', axis = 0):
+        '''
+        input_object: can be a list, a list of lists, a dictionary, a numpy array.
+        colindex: should be a list of column names.
+        rowindex: should be a list of row names.
+        axis: 0 if input_object contains data by column (default). 1 if input_object contains data by row.
+        '''
+        import numpy as np
         self.df = input_object
         # self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
 
+        # Pre-convert the df
+        def to_df(obj, axis):
+            if str(type(obj)) == "<class 'numpy.ndarray'>":
+                if axis == 0:
+                    return obj.tolist()
+                else:
+                    return obj.T.tolist()
+            elif type(obj) == list and obj[0] == [int or str or float]:
+                if axis == 0:
+                    return np.array(obj).tolist()
+                else:
+                    return np.array(obj).T.tolist()
+            elif type(obj) == dict:
+                if axis == 0:
+                    return dict_to_array(obj).tolist()
+                else:
+                    return dict_to_array(obj).T.tolist()
+            elif type(obj) == list and obj[0] == list:
+                for lst in range(obj-1):
+                    if len(obj[lst]) == len(obj[lst+1]):
+                        if axis == 0:
+                            return np.array(obj).tolist()
+                        else:
+                            return np.array(obj).T.tolist()
+            else:
+                if axis == 0:
+                    return obj
+                else:
+                    return np.array(obj).T.tolist()
+
+        self.df = to_df(self.df, axis)
+
         # Check if the input_object if a list
-        if type(input_object) == list:
-            mylist = input_object
+        if type(self.df) == list:
+            mylist = self.df
             count_elements = len(mylist)
             count_records_first_element = len(mylist[0])
 
@@ -22,6 +59,12 @@ class DataFrame:
             if only_lists == False:
                 raise Exception("Only list of lists is accepted for now...")
             else:
+                # Check if each element is int, float, bool or string
+                for i in range(0, count_elements):
+                    if all(isinstance(j, (int, float, bool, str)) for j in mylist[i]) == False:
+                        print(type(mylist[i]))
+                        raise Exception("Data types should be integer, float, boolean or string.")
+                        
                 # Check if each element contains consistent data types
                 for i in range(0, count_elements):
                     if all(isinstance(j, type(mylist[i][0])) for j in mylist[i]) == False:
@@ -47,32 +90,42 @@ class DataFrame:
                         raise Exception(f"Not the right number of column names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
 
                 my_dict = dict(zip(colindex, mylist))
-                my_dict['colindex'] = list(colindex)
-                my_dict['rowindex'] = list(rowindex)
+                self.colindex = list(colindex)
+                self.rowindex = list(rowindex)
                 self.df = my_dict
         else:
-            raise Exception(f"The input should be a list. Now, it is a {type(self.df)}")
-
+            raise Exception(f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(self.df)}")
 
     # To modify the content of the df
     def __setitem__(self, key, value):
-        self.df[key] = value
+        self.df[key] = value    # SHOULD BE MODIFIED TO CHECK IF THE KEY IS IN COLINDEX
 
     # To get the content of the df
     def __getitem__(self, key):
-        return self.df[key]
+        import numpy as np
+        if key in self.colindex:
+            return np.array(self.df[key])
+        elif (isinstance(key, int) == False) | (key < 0) | (key > len(self.df[self.colindex[0]])):
+                raise Exception(f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}")
+        else:
+            return np.array(self.df[self.colindex[key]])
+
+    # To get the content of one row
+    def get_row(self, index):
+        if isinstance(index, int) == False:
+            raise Exception(f"The index should be an integer.")
+        elif (index > len(self.df[self.colindex[0]])) | index < 0:
+            raise Exception(f"The index is out of range. It should be positive and smaller than {len(self.df[self.colindex[0]])}")
+        else:
+            return [self.df[i][index] for i in self.colindex]
 
     # To print the df
     def __repr__(self):
-        list_col = self.df['colindex']
-        n_print = { key:value for key,value in self.df.items() if key in list_col}
-        return f"{n_print}" + \
-            "\n\n" + \
-            f"It is a {type(self.df).__name__}." + \
-            "\n\n" + \
-            f"Full content:" + "\n" + \
-            f"{self.df}."
-    
+        import numpy as np
+        n_print = { key:value for key,value in self.df.items() if key in self.colindex}
+        return f"This is a {type(self.df).__name__}." + "\n" + \
+            f"{n_print}"
+
     # @staticmethod
     # def nice_print ():
     #     list_col = self.df['colindex']
