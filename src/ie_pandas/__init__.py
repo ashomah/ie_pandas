@@ -102,7 +102,13 @@ class DataFrame:
 
     # To get the content of the df
     def __getitem__(self, key):
-        return self.df[key]     # SHOULD BE MODIFIED TO CHECK IF THE KEY IS IN COLINDEX
+        import numpy as np
+        if key in self.colindex:
+            return np.array(self.df[key])
+        elif (isinstance(key, int) == False) | (key < 0) | (key > len(self.df[self.colindex[0]])):
+                raise Exception(f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}")
+        else:
+            return np.array(self.df[self.colindex[key]])
 
     # To get the content of one row
     def get_row(self, index):
@@ -115,15 +121,11 @@ class DataFrame:
 
     # To print the df
     def __repr__(self):
-        list_col = self.colindex
-        n_print = { key:value for key,value in self.df.items() if key in list_col}
-        return f"{n_print}" + \
-            "\n\n" + \
-            f"It is a {type(self.df).__name__}." + \
-            "\n\n" + \
-            f"Full content:" + "\n" + \
-            f"{self.df}."
-    
+        import numpy as np
+        n_print = { key:value for key,value in self.df.items() if key in self.colindex}
+        return f"This is a {type(self.df).__name__}." + "\n" + \
+            f"{n_print}"
+
     # @staticmethod
     # def nice_print ():
     #     list_col = self.df['colindex']
