@@ -10,8 +10,6 @@ class DataFrame:
         axis: 0 if input_object contains data by column (default). 1 if input_object contains data by row.
         '''
         self.df = input_object
-        # self.name = hex(id(self))
-        # self.input_object = to_array(self.input_object)
 
         #########################################################
         # PRE-CONVERT THE DF
@@ -182,66 +180,25 @@ class DataFrame:
 
     # To print the df
     def __repr__(self):
-        n_print = ""
         first = 1
         max_len_rowindex = len(max(self.rowindex, key=len))
         max_len_colindex = []
         df_data = np.array(list(self.df.values()))
-
-        # ls = []
-        # for i in df_data:
-        #     for j in i:
-        #         ls.append(j)
-        # max_len_data = len(max(ls, key=len))
-        # print(ls)
-
-        new_print = f"{'':<{max_len_rowindex}}"
+        nice_print = f"{'':<{max_len_rowindex}}"
         for c in self.colindex:
             max_col = len(max(list(map(str, self.df[c])), key=len))
             if max_col > len(c):
                 max_len_colindex.append(max_col)
             else:
                 max_len_colindex.append(len(c))
-            new_print += f"  {c:>{max_len_colindex[self.colindex.index(c)]}}"
+            nice_print += f"  {c:>{max_len_colindex[self.colindex.index(c)]}}"
         for r in self.rowindex:
-            new_print += f"\n{r:<{max_len_rowindex}}"
+            nice_print += f"\n{r:<{max_len_rowindex}}"
             for c in self.colindex:
-                new_print += f"  {str(self.df[c][self.rowindex.index(r)]):>{max_len_colindex[self.colindex.index(c)]}}"
+                nice_print += f"  {str(self.df[c][self.rowindex.index(r)]):>{max_len_colindex[self.colindex.index(c)]}}"
 
-        # print(new_print)
-        return new_print
-        # for i in self.colindex
+        return nice_print
 
-        for key in self.colindex:
-            for i in range(len(list(self.df.items()))):
-                if key == list(self.df.items())[i][0]:
-                    if first == 1:
-                        first = 0
-                        n_print = f"{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}" 
-                    else:
-                        n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
-        return f"{n_print}"
-
-    #def sum(self):
-     #   for key in self.colindex:
-      #      print("self.df[key]:", self.df[key])
-       #     list(map(float, self.df[key]))
-        #    if (isinstance(j, (int, float)) for j in self.df[key]) == True:
-         #       return sum(self.df[key])
-        
-            
-#     def sum(self):
-#         sum_list=[]
-#         sum_dictionary = dict()
-#         for key in self.keys:
-#             if all(isinstance(x, (int, float, np.int_, np.float_))for x in self.df[key]):
-#                 sum_dictionary[key] = np.sum(self.df[key])
-#                 else:
-#                     pass
-                
-#                 sum_list.append(sum_dictionary)
-#             return sum_list
-        
     def sum(self):
         copy = self
         sum_col=[]
@@ -310,49 +267,6 @@ class DataFrame:
         print("cols:", cols)
         print("median_col:", median_col)
         return median_col           
-
-    # def __repr__(self):
-    #     n_print = ""
-    #     first = 1
-    #     for key in self.colindex:
-    #         for i in range(len(list(self.df.items()))):
-    #             if key == list(self.df.items())[i][0]:
-    #                 if first == 1:
-    #                     first = 0
-    #                     n_print = f"{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}" 
-    #                 else:
-    #                     n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
-    #     return f"{n_print}"
-
-    # def __repr__(self):
-    #     n_print = { key:value for key,value in self.df.items() if key in self.colindex}
-    #     return f"{n_print}"
-
-    # @staticmethod
-    # def nice_print ():
-    #     list_col = self.df['colindex']
-    #     n_print = { key:value for key,value in self.df.items() if key in list_col}
-    #     return f"{n_print}"
-
-    # def pretty(self, list_col):
-    #     n_print = {key:value for key,value in self.df.items() if key in list_col}
-    #     return n_print
-
-# def to_array(obj):
-#     """
-#     Function to convert any object to numpy array
-#     """
-
-#     if str(type(obj)) == "<class 'numpy.ndarray'>":
-#         return obj
-#     elif type(obj) == list and obj[0] == [int or str or float]:
-#         return np.array(obj)
-#     elif type(obj) == dict:
-#         return dict_to_array(obj)
-#     elif type(obj) == list and obj[0] == list:
-#         for lst in range(obj - 1):
-#             if len(obj[lst]) == len(obj[lst + 1]):
-#                 return np.array(obj)
      
 # To indicate the script has been run when importing the package
 print("Done __init__.py")
