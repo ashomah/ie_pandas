@@ -11,13 +11,17 @@ def get_row(self, index):
         return [self.df[i][index] for i in self.colindex]
 
 
-artists_dict = {"artist_name": ["James Blake", "Björk", "Christine & The Queens", "DJ Koze", "Solange"], "age": [30, 53, 31, 47, 32], "albums": [4, 10, 2, 5, 4]}
+dic = {'col_1': [3.0, 2.0, 1.0, 0.0],
+       'col_2': ['as', 'bs', 'cs', 'ds'],
+       'col_3': [3, 2, 1, 0],
+       'col_4': [True, True, False, True]}
 
-df = DataFrame(artists_dict)
+dict_pandas = DataFrame(dic)
 
+test = [2.0, 'bs', 2, True]
 
-expected_output = ['Björk', '53', '10']
+expected_output = test
 
-output = df.get_row(1)
+output = dict_pandas.get_row(1)
 
 assert output == expected_output
