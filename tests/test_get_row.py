@@ -1,5 +1,7 @@
 from ie_pandas import DataFrame
 
+import pytest
+
 def get_row(self, index):
     if isinstance(index, int) == False:
         raise Exception(f"The index should be an integer.")
