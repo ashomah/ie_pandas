@@ -22,25 +22,13 @@ class DataFrame:
 
             # From dictionary of lists
             if type(list(dic.items())[0][1]) == list:
-                arr_dic = np.array(list(dic.items()))
-                cols = []
-                ls = []
-                for i in arr_dic:
-                    for j in i:
-                        if type(j) != list:
-                            cols.append(j)
-                        elif type(j) == list:
-                            for k in j:
-                                ls.append(k)
-                ls2 = []
-                for item in range(int((len(ls) / len(arr_dic)))):
-                    counter = 0
-                    for ii in range(int(len(arr_dic))):
-                        ls2.append(ls[item + counter])
-                        counter += int((arr_dic.itemsize / 2))
-                return np.reshape(
-                    np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
-                ), cols
+                list_items = list(dic.items())
+                col_names = []
+                col_data = []
+                for i in range(0, len(list_items)):
+                    col_names.append(list_items[i][0])
+                    col_data.append(list_items[i][1])
+                return col_data, col_names
 
             # From dictionary of numpy arrays
             elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
@@ -79,10 +67,11 @@ class DataFrame:
             elif type(obj) == dict:
                 if axis == 0:
                     array_n_cols = dict_to_array(obj)
-                    return array_n_cols[0].T.tolist(), array_n_cols[1]
+                    return array_n_cols[0], array_n_cols[1]
                 else:
                     array_n_cols = dict_to_array(obj)
-                    return array_n_cols[0].tolist(), array_n_cols[1]
+                    T_array = [[row[i] for row in array_n_cols[0]] for i in range(len(array_n_cols[0][0]))]
+                    return T_array, array_n_cols[1]
             elif type(obj) == list and obj[0] == list:
                 for lst in range(obj-1):
                     if len(obj[lst]) == len(obj[lst+1]):
