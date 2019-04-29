@@ -141,14 +141,14 @@ class DataFrame:
                     colindex = dict_cols
                 else:
                     if len(colindex) != count_elements:
-                        raise Exception(f"Not the right number of column names ! It shoul be {count_elements}, but it is {len(colindex)}.")
+                        raise Exception(f"Not the right number of column names ! It should be {count_elements}, but it is {len(colindex)}.")
 
                 # Apply the row index
                 if rowindex == '':
                     rowindex = list(map(str, range(0, count_records_first_element)))
                 else:
                     if len(rowindex) != count_records_first_element:
-                        raise Exception(f"Not the right number of row names ! It shoul be {count_records_first_element}, but it is {len(rowindex)}.")
+                        raise Exception(f"Not the right number of row names ! It should be {count_records_first_element}, but it is {len(rowindex)}.")
 
                 my_dict = dict(zip(colindex, mylist))
                 self.colindex = list(colindex)
@@ -222,6 +222,98 @@ class DataFrame:
                     else:
                         n_print += f"\n{list(self.df.items())[i][0]} : {list(self.df.items())[i][1]}"                 
         return f"{n_print}"
+
+    #def sum(self):
+     #   for key in self.colindex:
+      #      print("self.df[key]:", self.df[key])
+       #     list(map(float, self.df[key]))
+        #    if (isinstance(j, (int, float)) for j in self.df[key]) == True:
+         #       return sum(self.df[key])
+        
+            
+#     def sum(self):
+#         sum_list=[]
+#         sum_dictionary = dict()
+#         for key in self.keys:
+#             if all(isinstance(x, (int, float, np.int_, np.float_))for x in self.df[key]):
+#                 sum_dictionary[key] = np.sum(self.df[key])
+#                 else:
+#                     pass
+                
+#                 sum_list.append(sum_dictionary)
+#             return sum_list
+        
+    def sum(self):
+        import numpy as np
+        copy = self
+        sum_col=[]
+        cols =[]
+        for key in copy.colindex:
+            try:
+                copy.df[key] = list(map(float, copy.df[key]))
+            except ValueError as ex:
+                pass
+                
+            if all(isinstance(z, (int, float))for z in copy.df[key]):
+                cols.append(key)
+                sum_col.append(sum(copy.df[key]))
+        print("cols:", cols)
+        print("sum_col:", sum_col)
+        return sum_col
+    
+    def min(self):
+        import numpy as np
+        copy = self
+        min_col=[]
+        cols =[]
+        for key in copy.colindex:
+            try:
+                copy.df[key] = list(map(float, copy.df[key]))
+            except ValueError as ex:
+                pass
+                
+            if all(isinstance(z, (int, float))for z in copy.df[key]):
+                cols.append(key)
+                min_col.append(min(copy.df[key]))
+        print("cols:", cols)
+        print("min_col:", min_col)
+        return min_col
+    
+    def max(self):
+        import numpy as np
+        copy = self
+        max_col=[]
+        cols =[]
+        for key in copy.colindex:
+            try:
+                copy.df[key] = list(map(float, copy.df[key]))
+            except ValueError as ex:
+                pass
+                
+            if all(isinstance(z, (int, float))for z in copy.df[key]):
+                cols.append(key)
+                max_col.append(max(copy.df[key]))
+        print("cols:", cols)
+        print("max_col:", max_col)
+        return max_col                  
+        
+    def median(self):
+        import statistics
+        copy = self
+        median_col=[]
+        cols =[]
+        for key in copy.colindex:
+            try:
+                copy.df[key] = list(map(float, copy.df[key]))
+            except ValueError as ex:
+                pass
+                
+            if all(isinstance(z, (int, float))for z in copy.df[key]):
+                cols.append(key)
+                median_col.append(statistics.median(copy.df[key]))
+        print("cols:", cols)
+        print("median_col:", median_col)
+        return median_col           
 
     # def __repr__(self):
     #     import numpy as np
