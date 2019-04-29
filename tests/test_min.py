@@ -1,4 +1,4 @@
-from ie_pandas.DataFrame import DataFrame
+from ie_pandas import DataFrame
 import pytest
 
 
@@ -7,7 +7,7 @@ def test_min_values_dataframe():
 
     df1 = DataFrame(artists_dict)
 
-    expected_output = [{'age': 30, 'albums': 2}]
+    expected_output = ['age', 'albums'] [30, 2]
 
     actual_output = df1.min()
 

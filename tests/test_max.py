@@ -1,4 +1,4 @@
-from ie_pandas.DataFrame import DataFrame
+from ie_pandas import DataFrame
 import pytest
 
 
@@ -7,7 +7,7 @@ def test_max_values_dataframe():
 
     df1 = DataFrame(artists_dict)
 
-    expected_output = [{'age': 53, 'albums': 10}]
+    expected_output = ['age', 'albums'] [53, 10]
 
     actual_output = df1.max()
 
