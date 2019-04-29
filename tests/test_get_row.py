@@ -14,7 +14,7 @@ def get_row(self, index):
 dic = {'col_1': [3, 2, 1.0, 0],
        'col_2': ['as', 'bs', 'cs', 'ds'],
        'col_3': [3, 2, 1, 0],
-       'col_4': ['a', 'b', 'c', 'd']}
+       'col_4': [True, True, False, True]}
 
 dict_pandas = DataFrame(dic)
 
