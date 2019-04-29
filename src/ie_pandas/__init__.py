@@ -70,7 +70,8 @@ class DataFrame:
                 if axis == 0:
                     return obj, cols
                 else:
-                    return np.array(obj).T.tolist(), cols
+                    T_array = [[j] for j in obj]
+                    return T_array, cols
 
         self.df, dict_cols = to_df(self.df, axis)
 
@@ -81,6 +82,8 @@ class DataFrame:
         # Check if the input_object if a list
         if type(self.df) == list:
             mylist = self.df
+            if all(isinstance(j , (int, float, str, bool)) for j in mylist) == True:
+                mylist = [mylist]
             count_elements = len(mylist)
             count_records_first_element = len(mylist[0])
 
