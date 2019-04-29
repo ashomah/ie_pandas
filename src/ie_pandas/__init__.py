@@ -19,7 +19,6 @@ class DataFrame:
             """
             Function to convert dictionaries to numpy arrays
             """
-
             # From dictionary of lists
             if type(list(dic.items())[0][1]) == list:
                 list_items = list(dic.items())
@@ -32,25 +31,13 @@ class DataFrame:
 
             # From dictionary of numpy arrays
             elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
-                arr_dic = np.array(list(my_dict.items()))
-                cols = []
-                ls = []
-                for i in arr_dic:
-                    for j in i:
-                        if str(type(j)) != "<class 'numpy.ndarray'>":
-                            cols.append(j)
-                        elif str(type(j)) == "<class 'numpy.ndarray'>":
-                            for k in j:
-                                ls.append(k)
-                ls2 = []
-                for item in range(int((len(ls) / len(arr_dic)))):
-                    counter = 0
-                    for ii in range(int(len(arr_dic))):
-                        ls2.append(ls[item + counter])
-                        counter += int((arr_dic.itemsize / 2))
-                return cols, np.reshape(
-                    np.array(ls2), ((int(arr_dic.itemsize / 2), len(arr_dic)))
-                ), cols
+                list_items = list(dic.items())
+                col_names = []
+                col_data = []
+                for i in range(0, len(list_items)):
+                    col_names.append(list_items[i][0])
+                    col_data.append(list_items[i][1].tolist())
+                return col_data, col_names
 
         def to_df(obj, axis):
             cols = ""
