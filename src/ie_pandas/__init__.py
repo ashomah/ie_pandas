@@ -1,3 +1,5 @@
+import numpy as np
+
 class DataFrame:
 
     def __init__(self, input_object, colindex = '', rowindex = '', axis = 0):
@@ -7,7 +9,6 @@ class DataFrame:
         rowindex: should be a list of row names.
         axis: 0 if input_object contains data by column (default). 1 if input_object contains data by row.
         '''
-        import numpy as np
         self.df = input_object
         # self.name = hex(id(self))
         # self.input_object = to_array(self.input_object)
@@ -163,7 +164,6 @@ class DataFrame:
 
     # To get the content of the df
     def __getitem__(self, key):
-        import numpy as np
         if key in self.colindex:
             return np.array(self.df[key])
         elif (isinstance(key, int) == False) | (key < 0) | (key > len(self.df[self.colindex[0]])):
@@ -182,7 +182,6 @@ class DataFrame:
 
     # To print the df
     def __repr__(self):
-        import numpy as np
         n_print = ""
         first = 1
         max_len_rowindex = len(max(self.rowindex, key=len))
@@ -244,7 +243,6 @@ class DataFrame:
 #             return sum_list
         
     def sum(self):
-        import numpy as np
         copy = self
         sum_col=[]
         cols =[]
@@ -262,7 +260,6 @@ class DataFrame:
         return sum_col
     
     def min(self):
-        import numpy as np
         copy = self
         min_col=[]
         cols =[]
@@ -280,7 +277,6 @@ class DataFrame:
         return min_col
     
     def max(self):
-        import numpy as np
         copy = self
         max_col=[]
         cols =[]
@@ -316,7 +312,6 @@ class DataFrame:
         return median_col           
 
     # def __repr__(self):
-    #     import numpy as np
     #     n_print = ""
     #     first = 1
     #     for key in self.colindex:
@@ -330,7 +325,6 @@ class DataFrame:
     #     return f"{n_print}"
 
     # def __repr__(self):
-    #     import numpy as np
     #     n_print = { key:value for key,value in self.df.items() if key in self.colindex}
     #     return f"{n_print}"
 
