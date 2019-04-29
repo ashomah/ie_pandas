@@ -1,4 +1,4 @@
-from ie_pandas.DataFrame import DataFrame
+from ie_pandas import DataFrame
 import pytest
 
 
@@ -7,7 +7,7 @@ def test_calculate_mean_values_in_dataframe():
 
     df1 = DataFrame(artists_dict)
 
-    expected_output = age: 38.6, albums: 5
+    expected_output = ['age', 'albums'] [38.6, 5]
 
     actual_output = df1.mean()
 
