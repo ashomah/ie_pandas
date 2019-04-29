@@ -137,8 +137,13 @@ class DataFrame:
 
     # To modify the content of the df
     def __setitem__(self, key, value):
-        self.df[key] = value    # SHOULD BE MODIFIED TO CHECK IF THE KEY IS IN COLINDEX
-
+        if key in self.colindex:
+            self.df[key] = value
+        elif (isinstance(key, int) == False) | (key < 0) | (key > len(self.df[self.colindex[0]])):
+                raise Exception(f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}")
+        else:
+            self.df[self.colindex[key]] = value
+            
     # To get the content of the df
     def __getitem__(self, key):
         if key in self.colindex:
