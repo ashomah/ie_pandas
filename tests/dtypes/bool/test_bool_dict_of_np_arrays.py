@@ -6,12 +6,8 @@ def bool_input_in_dict_of_lists():
     np_array = np.array(artists_dict_of_lists)
     dict_of_lists_df = DataFrame(np_array, colindex=['age', 'albums'])
 
-    expected_output =       age   albums
-0    True   False
-1    False  True
-2    True   False
-3    False  True
-4    True   False
+    expected_output ="__   age  albums/n0   True   False/n1  False    True/n2   True   False/n3  False    True/n4   True   False"
+
 
     actual_output = DataFrame(dict_of_lists_df)
 

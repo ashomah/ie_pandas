@@ -6,12 +6,7 @@ def integer_input_in_dict_of_lists():
     np_array = np.array(artists_dict_of_lists)
     dict_of_lists_df = DataFrame(np_array, colindex=['age', 'albums'])
 
-    expected_output =       age   albums
-0    30  4
-1    53  10
-2    31  2
-3    47  5
-4    32  4
+    expected_output = "__age  albums/n0  30       4/n1  53      10/n2  31       2/n3  47       5/n4  32       4"
 
     actual_output = DataFrame(dict_of_lists_df)
 
