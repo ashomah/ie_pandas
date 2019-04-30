@@ -7,7 +7,7 @@ def test_calculate_median_values_in_dataframe():
 
     df1 = DataFrame(artists_dict)
 
-    expected_output = ['age', 'albums'] [32, 4]
+    expected_output = [32.0, 4.0]
 
     actual_output = df1.median()
 
