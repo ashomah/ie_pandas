@@ -23,9 +23,13 @@ dict_pandas = DataFrame(dic)
 
 testing = [3, 2, 1, 0]
 
+testing = np.array(testing)
+
+testing = testing#.astype('<U1')
+
 expected_output = np.array(testing)
 
-output = dict_pandas[2]
+output = dict_pandas[2].any()
 
 assert output == expected_output
 
