@@ -15,8 +15,14 @@ class DataFrame:
             len(input_object)
         except:
             raise Exception(
-                f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(input_object)}"
+                f"The input should be a list (non-empty), a list of lists, a dictionary of lists, or a dictionary of numpy arrays. Now, it is a {type(input_object)}"
             )
+
+        if len(input_object) == 0:
+            raise Exception(
+                f"The input should be a list (non-empty), a list of lists, a dictionary of lists, or a dictionary of numpy arrays. Now, it is a {type(input_object)}"
+            )
+
         self.df = input_object
 
         #########################################################
@@ -160,7 +166,7 @@ class DataFrame:
                 self.df = my_dict
         else:
             raise Exception(
-                f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(self.df)}"
+                f"The input should be a list (non-empty), a list of lists, a dictionary of lists, or a dictionary of numpy arrays. Now, it is a {type(self.df)}"
             )
 
     # To modify the content of the df
