@@ -9,6 +9,12 @@ class DataFrame:
         rowindex: should be a list of row names.
         axis: 0 if input_object contains data by column (default). 1 if input_object contains data by row.
         '''
+
+        # Check if input_object is empty or a single value
+        try:
+            len(input_object)
+        except:
+            raise Exception(f"The input should be a list, a list of lists, a dictionary, or a numpy array. Now, it is a {type(input_object)}")
         self.df = input_object
 
         #########################################################
