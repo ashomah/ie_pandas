@@ -277,7 +277,6 @@ class DataFrame:
         return max_col
 
     def median(self):
-        import statistics
 
         copy = self
         median_col = []
@@ -290,9 +289,24 @@ class DataFrame:
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
-                median_col.append(statistics.median(copy.df[key]))
+                median_col.append(np.median(copy.df[key]))
         return median_col
 
+    def mean(self):
+
+        copy = self
+        mean_col = []
+        cols = []
+        for key in copy.colindex:
+            try:
+                copy.df[key] = list(map(float, copy.df[key]))
+            except ValueError as ex:
+                pass
+
+            if all(isinstance(z, (int, float)) for z in copy.df[key]):
+                cols.append(key)
+                mean_col.append(np.mean(copy.df[key]))
+        return mean_col
 
 # To indicate the script has been run when importing the package
 print("Done __init__.py")
