@@ -201,7 +201,9 @@ class DataFrame:
 
     # To get the content of one row
     def get_row(self, index):
-        if isinstance(index, int) == False:
+        if index in self.rowindex:
+            return [self.df[i][self.rowindex.index(index)] for i in self.colindex]
+        elif isinstance(index, int) == False:
             raise Exception(f"The index should be an integer.")
         elif (index > len(self.df[self.colindex[0]])) | index < 0:
             raise Exception(
