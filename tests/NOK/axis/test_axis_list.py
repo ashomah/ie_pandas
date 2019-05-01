@@ -7,6 +7,6 @@ def test_axis_correctly_show_list():
 
 	expected_output ="    1     2      3\n0  True  True  False"
 	
-	output = df1
+	output = repr(df1)
 	
 	assert output == expected_output

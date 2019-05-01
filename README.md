@@ -8,7 +8,7 @@ Leandro Handal | Martin Hofbauer | Ashley O'Mahony | Gerald Walravens
 
 **ie_pandas** is a group project.
 
-The environment *only_np.yml* has been prepared with Python 3.7 and the packages Numpy 1.16.2 and statistics 1.0.3.5 only, to avoid uncontrolled dependencies during development.
+The environment *only_np.yml* has been prepared with Python 3.7 and the package Numpy 1.16.2 only, to avoid uncontrolled dependencies during development.
 
 Once the environment is installed in Anaconda, it should be activated with `conda activate only_np`.  
 
