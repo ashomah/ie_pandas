@@ -76,8 +76,8 @@ class DataFrame:
                         for i in range(len(array_n_cols[0][0]))
                     ]
                     return T_array, array_n_cols[1]
-            elif type(obj) == list and obj[0] == list:
-                for lst in range(obj - 1):
+            elif type(obj) == list and type(obj[0]) == list:
+                for lst in range(0, len(obj)):
                     if len(obj[lst]) == len(obj[lst + 1]):
                         if axis == 0:
                             return np.array(obj).tolist(), cols
