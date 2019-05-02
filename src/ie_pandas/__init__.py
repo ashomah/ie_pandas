@@ -56,10 +56,12 @@ class DataFrame:
         def to_df(obj, axis):
             cols = ""
             if str(type(obj)) == "<class 'numpy.ndarray'>":
+                l_obj = obj.tolist()
                 if axis == 0:
-                    return obj.tolist(), cols
+                    return l_obj, cols
                 else:
-                    return obj.T.tolist(), cols
+                    T_array = [[j] for j in l_obj]
+                    return T_array, cols
             elif type(obj) == dict:
                 if axis == 0:
                     array_n_cols = dict_to_array(obj)
