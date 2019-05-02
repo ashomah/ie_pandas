@@ -60,11 +60,6 @@ class DataFrame:
                     return obj.tolist(), cols
                 else:
                     return obj.T.tolist(), cols
-            elif type(obj) == list and obj[0] == [int or str or float]:
-                if axis == 0:
-                    return np.array(obj).tolist(), cols
-                else:
-                    return np.array(obj).T.tolist(), cols
             elif type(obj) == dict:
                 if axis == 0:
                     array_n_cols = dict_to_array(obj)
@@ -207,7 +202,7 @@ class DataFrame:
             return [self.df[i][self.rowindex.index(index)] for i in self.colindex]
         elif isinstance(index, int) == False:
             raise Exception(f"The index should be an integer or a row name.")
-        elif (index > len(self.df[self.colindex[0]])) | index < 0:
+        elif (index > len(self.df[self.colindex[0]])) | (index < 0):
             raise Exception(
                 f"The index is out of range. It should be positive and smaller than {len(self.df[self.colindex[0]])}"
             )
@@ -235,6 +230,7 @@ class DataFrame:
 
         return nice_print
 
+    # To sum elements of numerical columns
     def sum(self):
         copy = self
         sum_col = []
@@ -250,6 +246,7 @@ class DataFrame:
                 sum_col.append(sum(copy.df[key]))
         return sum_col
 
+    # To find the minimum of the elements of numerical columns
     def min(self):
         copy = self
         min_col = []
@@ -265,6 +262,7 @@ class DataFrame:
                 min_col.append(min(copy.df[key]))
         return min_col
 
+    # To find the maximum of the elements of numerical columns
     def max(self):
         copy = self
         max_col = []
@@ -280,8 +278,8 @@ class DataFrame:
                 max_col.append(max(copy.df[key]))
         return max_col
 
+    # To find the median of the elements of numerical columns
     def median(self):
-
         copy = self
         median_col = []
         cols = []
@@ -296,8 +294,8 @@ class DataFrame:
                 median_col.append(np.median(copy.df[key]))
         return median_col
 
+    # To find the mean of the elements of numerical columns
     def mean(self):
-
         copy = self
         mean_col = []
         cols = []
