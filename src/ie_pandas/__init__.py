@@ -172,13 +172,18 @@ class DataFrame:
     # To modify the content of the df
     def __setitem__(self, key, value):
         if key in self.colindex:
-            self.df[key] = value
+            if (type(value) != list) | (len(value) != len(self.df[key])) | (all(isinstance(j, (int, float, bool, str)) for j in self.df[key])) | ( all(isinstance(j, type(self.df[key][0])) for j in self.df[key]) == False):
+                    raise Exception(f"The value to insert should be a list of the same length as initial column, with consistent data type among integer, float, boolean or string.")
+            else:
+                self.df[key] = value
         elif (isinstance(key, int) == False):
             raise Exception(f"The index should be an integer or a column name.")
         elif (key < 0) | (key > len(self.df[self.colindex[0]])):
             raise Exception(
                 f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}"
             )
+        elif (type(value) != list) | (len(value) != len(self.df[self.colindex[key]])) | (all(isinstance(j, (int, float, bool, str)) for j in self.df[self.colindex[key]])) | ( all(isinstance(j, type(self.df[self.colindex[key]][0])) for j in self.df[self.colindex[key]]) == False):
+                raise Exception(f"The value to insert should be a list of the same length as initial column, with consistent data type among integer, float, boolean or string.")
         else:
             self.df[self.colindex[key]] = value
 
