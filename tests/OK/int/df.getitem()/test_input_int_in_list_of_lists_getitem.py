@@ -37,7 +37,7 @@ def test_input_int_in_list_of_lists_getitem_empty():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
     df = DataFrame(obj, colindex = ['AGE', 'ALBUMS'], rowindex = ['A', 'B', 'C', 'D', 'E'])
 
-    with pytest.raises(TypeError) as exc_info:
+    with pytest.raises(Exception) as exc_info:
         df['']
 
     exception_raised = exc_info.value
