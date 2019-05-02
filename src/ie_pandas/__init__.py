@@ -239,10 +239,10 @@ class DataFrame:
         sum_col = []
         cols = []
         for key in copy.colindex:
-            try:
-                copy.df[key] = list(map(float, copy.df[key]))
-            except ValueError as ex:
-                pass
+            # try:
+            #     copy.df[key] = list(map(float, copy.df[key]))
+            # except ValueError as ex:
+            #     pass
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
@@ -254,10 +254,10 @@ class DataFrame:
         min_col = []
         cols = []
         for key in copy.colindex:
-            try:
-                copy.df[key] = list(map(float, copy.df[key]))
-            except ValueError as ex:
-                pass
+            # try:
+            #     copy.df[key] = list(map(float, copy.df[key]))
+            # except ValueError as ex:
+            #     pass
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
@@ -269,10 +269,10 @@ class DataFrame:
         max_col = []
         cols = []
         for key in copy.colindex:
-            try:
-                copy.df[key] = list(map(float, copy.df[key]))
-            except ValueError as ex:
-                pass
+            # try:
+            #     copy.df[key] = list(map(float, copy.df[key]))
+            # except ValueError as ex:
+            #     pass
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
@@ -285,10 +285,10 @@ class DataFrame:
         median_col = []
         cols = []
         for key in copy.colindex:
-            try:
-                copy.df[key] = list(map(float, copy.df[key]))
-            except ValueError as ex:
-                pass
+            # try:
+            #     copy.df[key] = list(map(float, copy.df[key]))
+            # except ValueError as ex:
+            #     pass
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
@@ -301,10 +301,10 @@ class DataFrame:
         mean_col = []
         cols = []
         for key in copy.colindex:
-            try:
-                copy.df[key] = list(map(float, copy.df[key]))
-            except ValueError as ex:
-                pass
+            # try:
+            #     copy.df[key] = list(map(float, copy.df[key]))
+            # except ValueError as ex:
+            #     pass
 
             if all(isinstance(z, (int, float)) for z in copy.df[key]):
                 cols.append(key)
