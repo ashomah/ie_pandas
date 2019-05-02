@@ -2,8 +2,8 @@ from ie_pandas import DataFrame
 import pytest
 
 def test_input_int_in_list_colindex_col_index():
-    artists_age_list = [30, 53, 31, 47, 32]
-    df = DataFrame(artists_age_list, colindex = ['AGE'])
+    obj = [30, 53, 31, 47, 32]
+    df = DataFrame(obj, colindex = ['AGE'])
 
     expected_output =  ['AGE']
 

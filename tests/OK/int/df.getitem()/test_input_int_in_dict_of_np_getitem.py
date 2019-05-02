@@ -2,7 +2,7 @@ from ie_pandas import DataFrame
 import pytest
 import numpy as np
 
-def test_input_int_in_dict_of_lists_getitem_by_index():
+def test_input_int_in_dict_of_np_getitem_by_index():
     obj = {'age':np.array([30, 53, 31, 47, 32]), 'albums':np.array([4, 10, 2, 5, 4])}
     df = DataFrame(obj, colindex = ['AGE', 'ALBUMS'], rowindex = ['A', 'B', 'C', 'D', 'E'])
 
@@ -12,7 +12,7 @@ def test_input_int_in_dict_of_lists_getitem_by_index():
 
     assert np.all(actual_output == expected_output)
 
-def test_input_int_in_dict_of_lists_getitem_by_rowindex():
+def test_input_int_in_dict_of_np_getitem_by_rowindex():
     obj = {'age':np.array([30, 53, 31, 47, 32]), 'albums':np.array([4, 10, 2, 5, 4])}
     df = DataFrame(obj, colindex = ['AGE', 'ALBUMS'], rowindex = ['A', 'B', 'C', 'D', 'E'])
 
@@ -22,7 +22,7 @@ def test_input_int_in_dict_of_lists_getitem_by_rowindex():
 
     assert np.all(actual_output == expected_output)
 
-def test_input_int_in_dict_of_lists_getitem_wrong():
+def test_input_int_in_dict_of_np_getitem_wrong():
     obj = {'age':np.array([30, 53, 31, 47, 32]), 'albums':np.array([4, 10, 2, 5, 4])}
     df = DataFrame(obj, colindex = ['AGE', 'ALBUMS'], rowindex = ['A', 'B', 'C', 'D', 'E'])
 
@@ -33,7 +33,7 @@ def test_input_int_in_dict_of_lists_getitem_wrong():
 
     assert exception_raised
 
-def test_input_int_in_dict_of_lists_getitem_empty():
+def test_input_int_in_dict_of_np_getitem_empty():
     obj = {'age':np.array([30, 53, 31, 47, 32]), 'albums':np.array([4, 10, 2, 5, 4])}
     df = DataFrame(obj, colindex = ['AGE', 'ALBUMS'], rowindex = ['A', 'B', 'C', 'D', 'E'])
 
