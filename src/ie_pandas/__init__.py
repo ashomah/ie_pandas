@@ -80,9 +80,10 @@ class DataFrame:
                 for lst in range(0, len(obj)):
                     if len(obj[lst]) == len(obj[lst + 1]):
                         if axis == 0:
-                            return np.array(obj).tolist(), cols
+                            return obj, cols
                         else:
-                            return np.array(obj).T.tolist(), cols
+                            T_array = [ [row[i] for row in obj] for i in range(len(obj[0])) ]
+                            return T_array, cols
             else:
                 if axis == 0:
                     return obj, cols
