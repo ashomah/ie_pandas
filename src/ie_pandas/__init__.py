@@ -112,7 +112,7 @@ class DataFrame:
                     only_lists = False
 
             if only_lists == False:
-                raise Exception("Only list of lists is accepted for now...")
+                raise Exception(f"The input should be a list (non-empty), a list of lists, a dictionary of lists, or a dictionary of numpy arrays.")
             else:
                 # Check if each element is int, float, bool or string
                 for i in range(0, count_elements):
