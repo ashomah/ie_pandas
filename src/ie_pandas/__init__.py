@@ -173,11 +173,9 @@ class DataFrame:
     def __setitem__(self, key, value):
         if key in self.colindex:
             self.df[key] = value
-        elif (
-            (isinstance(key, int) == False)
-            | (key < 0)
-            | (key > len(self.df[self.colindex[0]]))
-        ):
+        elif (isinstance(key, int) == False):
+            raise Exception(f"The index should be an integer or a column name.")
+        elif (key < 0) | (key > len(self.df[self.colindex[0]])):
             raise Exception(
                 f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}"
             )
@@ -188,11 +186,9 @@ class DataFrame:
     def __getitem__(self, key):
         if key in self.colindex:
             return np.array(self.df[key])
-        elif (
-            (isinstance(key, int) == False)
-            | (key < 0)
-            | (key > len(self.df[self.colindex[0]]))
-        ):
+        elif (isinstance(key, int) == False):
+            raise Exception(f"The index should be an integer or a column name.")
+        elif (key < 0) | (key > len(self.df[self.colindex[0]])):
             raise Exception(
                 f"The key is out of range. It should be positive integer and smaller than {len(self.df[self.colindex[0]])}"
             )
@@ -204,7 +200,7 @@ class DataFrame:
         if index in self.rowindex:
             return [self.df[i][self.rowindex.index(index)] for i in self.colindex]
         elif isinstance(index, int) == False:
-            raise Exception(f"The index should be an integer.")
+            raise Exception(f"The index should be an integer or a row name.")
         elif (index > len(self.df[self.colindex[0]])) | index < 0:
             raise Exception(
                 f"The index is out of range. It should be positive and smaller than {len(self.df[self.colindex[0]])}"
