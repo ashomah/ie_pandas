@@ -3,7 +3,13 @@ import pytest
 
 
 def test_string_input_in_list():
-    obj = ["James Blake", "Björk", "Christine & The Queens", "DJ Koze", "Solange"]
+    obj = [
+        "James Blake",
+        "Björk",
+        "Christine & The Queens",
+        "DJ Koze",
+        "Solange",
+    ]
 
     df1 = DataFrame(obj)
 

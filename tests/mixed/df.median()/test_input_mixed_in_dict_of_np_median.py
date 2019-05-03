@@ -11,7 +11,9 @@ def test_input_mixed_in_dict_of_np_median_odd():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     expected_output = [32.1, 4.0, 1.0]

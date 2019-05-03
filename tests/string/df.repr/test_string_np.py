@@ -5,7 +5,13 @@ import numpy as np
 
 def test_string_input_in_np():
     obj = np.array(
-        ["James Blake", "Björk", "Christine & The Queens", "DJ Koze", "Solange"]
+        [
+            "James Blake",
+            "Björk",
+            "Christine & The Queens",
+            "DJ Koze",
+            "Solange",
+        ]
     )
 
     df1 = DataFrame(obj)

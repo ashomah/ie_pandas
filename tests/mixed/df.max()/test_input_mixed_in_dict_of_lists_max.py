@@ -10,7 +10,9 @@ def test_input_mixed_in_dict_of_lists_max():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     expected_output = [53.1, 10, True]

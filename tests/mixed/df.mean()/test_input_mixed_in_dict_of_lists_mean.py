@@ -10,7 +10,9 @@ def test_input_mixed_in_dict_of_lists_mean():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     expected_output = [38.7, 5.0, 0.6]

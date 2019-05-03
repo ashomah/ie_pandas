@@ -5,7 +5,9 @@ import numpy as np
 
 def test_input_mixed_in_np_median_odd():
     obj = np.array([30, 53.0, "31", True, 32, 100])
-    df = DataFrame(obj, colindex=["AGE"], rowindex=["A", "B", "C", "D", "E", "F"])
+    df = DataFrame(
+        obj, colindex=["AGE"], rowindex=["A", "B", "C", "D", "E", "F"]
+    )
 
     expected_output = []
 

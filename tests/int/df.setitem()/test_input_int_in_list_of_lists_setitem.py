@@ -5,7 +5,9 @@ import numpy as np
 
 def test_input_int_in_list_of_lists_setitem_by_index():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
     df[0] = [100, 100, 100, 100, 100]
 
     expected_output = np.array([100, 100, 100, 100, 100])
@@ -17,7 +19,9 @@ def test_input_int_in_list_of_lists_setitem_by_index():
 
 def test_input_int_in_list_of_lists_setitem_by_rowindex():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
     df["AGE"] = [100, 100, 100, 100, 100]
 
     expected_output = np.array([100, 100, 100, 100, 100])
@@ -29,7 +33,9 @@ def test_input_int_in_list_of_lists_setitem_by_rowindex():
 
 def test_input_int_in_list_of_lists_setitem_wrong():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[100] = [100, 100, 100, 100, 100]
@@ -41,7 +47,9 @@ def test_input_int_in_list_of_lists_setitem_wrong():
 
 def test_input_int_in_list_of_lists_setitem_empty():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[""] = [100, 100, 100, 100, 100]
@@ -53,7 +61,9 @@ def test_input_int_in_list_of_lists_setitem_empty():
 
 def test_input_int_in_list_of_lists_setitem_wrong_length():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[0] = [100]
@@ -65,7 +75,9 @@ def test_input_int_in_list_of_lists_setitem_wrong_length():
 
 def test_input_int_in_list_of_lists_setitem_wrong_length_rowindex():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df["AGE"] = [100]
@@ -77,7 +89,9 @@ def test_input_int_in_list_of_lists_setitem_wrong_length_rowindex():
 
 def test_input_int_in_list_of_lists_setitem_inconsistent_type():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[0] = [100, 100, "100", 100.0, 100]

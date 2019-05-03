@@ -11,7 +11,9 @@ def test_input_mixed_in_dict_of_lists_getitem_by_index():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     expected_output = np.array([4, 10, 2, 5, 4])
@@ -29,7 +31,9 @@ def test_input_mixed_in_dict_of_lists_getitem_by_rowindex():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     expected_output = np.array([4, 10, 2, 5, 4])
@@ -47,7 +51,9 @@ def test_input_mixed_in_dict_of_lists_getitem_wrong():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:
@@ -66,7 +72,9 @@ def test_input_mixed_in_dict_of_lists_getitem_empty():
         "D": [True, False, True, True, False],
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:

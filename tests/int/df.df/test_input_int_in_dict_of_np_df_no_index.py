@@ -4,7 +4,10 @@ import numpy as np
 
 
 def test_input_int_in_dict_of_np_df_no_index():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
     df = DataFrame(obj)
 
     expected_output = {"age": [30, 53, 31, 47, 32], "albums": [4, 10, 2, 5, 4]}

@@ -11,7 +11,9 @@ def test_input_mixed_in_dict_of_np_setitem_by_index():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
     df[0] = [100, 100, 100, 100, 100]
 
@@ -30,7 +32,9 @@ def test_input_mixed_in_dict_of_np_setitem_by_rowindex():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
     df["AGE"] = [100, 100, 100, 100, 100]
 
@@ -49,7 +53,9 @@ def test_input_mixed_in_dict_of_np_setitem_wrong():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:
@@ -68,7 +74,9 @@ def test_input_mixed_in_dict_of_np_setitem_empty():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:
@@ -87,7 +95,9 @@ def test_input_mixed_in_dict_of_np_setitem_wrong_length():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:
@@ -106,7 +116,9 @@ def test_input_mixed_in_dict_of_np_setitem_wrong_length_rowindex():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:
@@ -125,7 +137,9 @@ def test_input_mixed_in_dict_of_np_setitem_inconsistent_type():
         "D": np.array([True, False, True, True, False]),
     }
     df = DataFrame(
-        obj, colindex=["AGE", "ALBUMS", "C", "D"], rowindex=["A", "B", "C", "D", "E"]
+        obj,
+        colindex=["AGE", "ALBUMS", "C", "D"],
+        rowindex=["A", "B", "C", "D", "E"],
     )
 
     with pytest.raises(Exception) as exc_info:

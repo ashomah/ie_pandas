@@ -4,8 +4,13 @@ import numpy as np
 
 
 def test_input_int_in_dict_of_np_setitem_by_index():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
     df[0] = [100, 100, 100, 100, 100]
 
     expected_output = np.array([100, 100, 100, 100, 100])
@@ -16,8 +21,13 @@ def test_input_int_in_dict_of_np_setitem_by_index():
 
 
 def test_input_int_in_dict_of_np_setitem_by_rowindex():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
     df["AGE"] = [100, 100, 100, 100, 100]
 
     expected_output = np.array([100, 100, 100, 100, 100])
@@ -28,8 +38,13 @@ def test_input_int_in_dict_of_np_setitem_by_rowindex():
 
 
 def test_input_int_in_dict_of_np_setitem_wrong():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[100] = [100, 100, 100, 100, 100]
@@ -40,8 +55,13 @@ def test_input_int_in_dict_of_np_setitem_wrong():
 
 
 def test_input_int_in_dict_of_np_setitem_empty():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[""] = [100, 100, 100, 100, 100]
@@ -52,8 +72,13 @@ def test_input_int_in_dict_of_np_setitem_empty():
 
 
 def test_input_int_in_dict_of_np_setitem_wrong_length():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[0] = [100]
@@ -64,8 +89,13 @@ def test_input_int_in_dict_of_np_setitem_wrong_length():
 
 
 def test_input_int_in_dict_of_np_setitem_wrong_length_rowindex():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df["AGE"] = [100]
@@ -76,8 +106,13 @@ def test_input_int_in_dict_of_np_setitem_wrong_length_rowindex():
 
 
 def test_input_int_in_dict_of_np_setitem_inconsistent_type():
-    obj = {"age": np.array([30, 53, 31, 47, 32]), "albums": np.array([4, 10, 2, 5, 4])}
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    obj = {
+        "age": np.array([30, 53, 31, 47, 32]),
+        "albums": np.array([4, 10, 2, 5, 4]),
+    }
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[0] = [100, 100, "100", 100.0, 100]

@@ -3,7 +3,10 @@ import pytest
 
 
 def test_string_input_in_list_of_lists():
-    obj = [["Björk", "Chris", "Solange"], ["James Blake", "DJ Koze", "David Byrne"]]
+    obj = [
+        ["Björk", "Chris", "Solange"],
+        ["James Blake", "DJ Koze", "David Byrne"],
+    ]
     df = DataFrame(obj)
 
     expected_output = (

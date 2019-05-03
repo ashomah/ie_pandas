@@ -4,7 +4,9 @@ import pytest
 
 def test_bool_input_in_list_of_lists():
     artists_list_of_lists = [[True, False, True], [False, True, False]]
-    list_of_lists_df = DataFrame(artists_list_of_lists, colindex=["age", "albums"])
+    list_of_lists_df = DataFrame(
+        artists_list_of_lists, colindex=["age", "albums"]
+    )
 
     expected_output = (
         "     age  albums"

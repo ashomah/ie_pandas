@@ -3,8 +3,13 @@ import pytest
 
 
 def test_bool_input_in_dict_of_lists():
-    artists_dict_of_lists = {"age": [True, False, True], "albums": [False, True, False]}
-    dict_of_lists_df = DataFrame(artists_dict_of_lists, colindex=["age", "albums"])
+    artists_dict_of_lists = {
+        "age": [True, False, True],
+        "albums": [False, True, False],
+    }
+    dict_of_lists_df = DataFrame(
+        artists_dict_of_lists, colindex=["age", "albums"]
+    )
 
     expected_output = (
         "     age  albums"

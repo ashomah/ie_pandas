@@ -74,7 +74,7 @@ To import the package in Python, use `from ie_pandas import DataFrame`.
 &nbsp;  
 
 #### Developers  
-The environment *only_np.yml* has been prepared to avoid uncontrolled dependencies during development. It contains:  
+The environment *only_np.yml* has been prepared to avoid uncontrolled dependencies during development. Available in `/environment`, it contains:  
 * Python | version 3.7.3  
 * Pip | version 19.0.3  
 * Numpy | version 1.16.2  

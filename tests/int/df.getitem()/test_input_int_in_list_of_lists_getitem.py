@@ -5,7 +5,9 @@ import numpy as np
 
 def test_input_int_in_list_of_lists_getitem_by_index():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     expected_output = np.array([4, 10, 2, 5, 4])
 
@@ -16,7 +18,9 @@ def test_input_int_in_list_of_lists_getitem_by_index():
 
 def test_input_int_in_list_of_lists_getitem_by_rowindex():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     expected_output = np.array([4, 10, 2, 5, 4])
 
@@ -27,7 +31,9 @@ def test_input_int_in_list_of_lists_getitem_by_rowindex():
 
 def test_input_int_in_list_of_lists_getitem_wrong():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[100]
@@ -39,7 +45,9 @@ def test_input_int_in_list_of_lists_getitem_wrong():
 
 def test_input_int_in_list_of_lists_getitem_empty():
     obj = [[30, 53, 31, 47, 32], [4, 10, 2, 5, 4]]
-    df = DataFrame(obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"])
+    df = DataFrame(
+        obj, colindex=["AGE", "ALBUMS"], rowindex=["A", "B", "C", "D", "E"]
+    )
 
     with pytest.raises(Exception) as exc_info:
         df[""]

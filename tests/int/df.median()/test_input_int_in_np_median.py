@@ -16,7 +16,9 @@ def test_input_int_in_np_median_odd():
 
 def test_input_int_in_np_median_even():
     obj = np.array([30, 53, 31, 47, 32, 100])
-    df = DataFrame(obj, colindex=["AGE"], rowindex=["A", "B", "C", "D", "E", "F"])
+    df = DataFrame(
+        obj, colindex=["AGE"], rowindex=["A", "B", "C", "D", "E", "F"]
+    )
 
     expected_output = [39.5]
 

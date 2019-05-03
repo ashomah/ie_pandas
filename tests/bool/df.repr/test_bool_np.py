@@ -9,7 +9,9 @@ def test_bool_input_in_np():
     df1 = DataFrame(artists_age_list, axis=1)
 
     expected_output = (
-        "      0      1     2      3     4" + "\n" + "0  True  False  True  False  True"
+        "      0      1     2      3     4"
+        + "\n"
+        + "0  True  False  True  False  True"
     )
 
     actual_output = repr(df1)
