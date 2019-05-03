@@ -1,6 +1,7 @@
 from ie_pandas import DataFrame
 import pytest
 
+
 def test_input_int_in_list_of_lists_repr_not_same_length():
     obj = [[30, 53, 31, 47, 32], [4, 10]]
 

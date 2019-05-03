@@ -60,7 +60,7 @@ class DataFrame:
                 return col_data, col_names
 
             # From dictionary of numpy arrays
-            elif str(type(list(dic.items())[0][1])) == "<class 'numpy.ndarray'>":
+            elif type(list(dic.items())[0][1]) is np.ndarray:
                 list_items = list(dic.items())
                 col_names = []
                 col_data = []
@@ -76,7 +76,7 @@ class DataFrame:
         def to_df(obj, axis):
             cols = ""
             rows = ""
-            if str(type(obj)) == "<class 'numpy.ndarray'>":
+            if type(obj) == np.ndarray:
                 l_obj = obj.tolist()
                 if axis == 0:
                     return l_obj, cols, rows
@@ -100,9 +100,8 @@ class DataFrame:
                         if axis == 0:
                             return obj, cols, rows
                         else:
-                            T_array = [
-                                [row[i] for row in obj] for i in range(len(obj[0]))
-                            ]
+                            rang = range(len(obj[0]))
+                            T_array = [[row[i] for row in obj] for i in rang]
                             return T_array, cols, rows
             else:
                 if axis == 0:
@@ -120,7 +119,8 @@ class DataFrame:
         # Check if the input_object if a list
         if type(self.df) == list:
             mylist = self.df
-            if all(isinstance(j, (int, float, str, bool)) for j in mylist) is True:
+            typck = all(isinstance(j, (int, float, str, bool)) for j in mylist)
+            if typck is True:
                 mylist = [mylist]
             count_elements = len(mylist)
             count_records_first_element = len(mylist[0])
@@ -133,35 +133,36 @@ class DataFrame:
 
             if only_lists is False:
                 raise Exception(
-                    f"The input should be a list (non-empty), a list of lists, "
-                    + f"a dictionary of lists, or a dictionary of numpy arrays."
+                    f"The input should be a list (non-empty), "
+                    + f"a list of lists, "
+                    + f"a dictionary of lists, "
+                    + f"or a dictionary of numpy arrays."
                 )
             else:
                 # Check if each element is int, float, bool or string
                 for i in range(0, count_elements):
-                    if (
-                        all(isinstance(j, (int, float, bool, str)) for j in mylist[i])
-                        is False
-                    ):
+                    m = mylist[i]
+                    t = all(isinstance(j, (int, float, bool, str)) for j in m)
+                    if t is False:
                         raise Exception(
-                            "Data types should be integer, float, boolean or string."
+                            "Data types should be "
+                            + "integer, float, boolean or string."
                         )
 
                 # Check if each element contains consistent data types
                 for i in range(0, count_elements):
-                    if (
-                        all(isinstance(j, type(mylist[i][0])) for j in mylist[i])
-                        is False
-                    ):
+                    ml = mylist[i]
+                    typck = all(isinstance(j, type(mylist[i][0])) for j in ml)
+                    if typck is False:
                         raise Exception(
-                            "Data types should be consistent within each column."
+                            "Data types should be consistent in each column."
                         )
 
                 # Check each list has the same number of elements
                 for i in range(0, count_elements):
                     if count_records_first_element != len(mylist[i]):
                         raise Exception(
-                            "Your lists don't have the same number of elements!"
+                            "Your lists haven't the same number of elements!"
                         )
 
                 # Apply the column index
@@ -179,7 +180,8 @@ class DataFrame:
 
                 # Apply the row index
                 if (rowindex == "") & (dict_rows == ""):
-                    rowindex = list(map(str, range(0, count_records_first_element)))
+                    c = count_records_first_element
+                    rowindex = list(map(str, range(0, c)))
                 elif (rowindex == "") & (dict_rows != ""):
                     rowindex = dict_rows
                 else:
@@ -203,11 +205,12 @@ class DataFrame:
 
     # To modify the content of the df
     def __setitem__(self, key, value):
+        ck = all(isinstance(j, (int, float, bool, str)) for j in value)
         if key in self.colindex:
             if (
                 (type(value) != list)
                 | (len(value) != len(self.df[key]))
-                | (all(isinstance(j, (int, float, bool, str)) for j in value) is False)
+                | (ck is False)
                 | (all(isinstance(j, type(value[0])) for j in value) is False)
             ):
                 raise Exception(
@@ -219,16 +222,17 @@ class DataFrame:
             else:
                 self.df[key] = value
         elif isinstance(key, int) is False:
-            raise Exception(f"The index should be an integer or a column name.")
+            raise Exception(f"Index should be an int or a column name.")
         elif (key < 0) | (key > len(self.df[self.colindex[0]])):
             raise Exception(
                 f"The key is out of range. It should be "
-                + f"positive integer and smaller than {len(self.df[self.colindex[0]])}"
+                + f"positive integer and smaller "
+                + f"than {len(self.df[self.colindex[0]])}"
             )
         elif (
             (type(value) != list)
             | (len(value) != len(self.df[self.colindex[key]]))
-            | (all(isinstance(j, (int, float, bool, str)) for j in value) is False)
+            | (ck is False)
             | (all(isinstance(j, type(value[0])) for j in value) is False)
         ):
             raise Exception(
@@ -245,11 +249,12 @@ class DataFrame:
         if key in self.colindex:
             return np.array(self.df[key])
         elif isinstance(key, int) is False:
-            raise Exception(f"The index should be an integer or a column name.")
+            raise Exception(f"Index should be an int or a column name.")
         elif (key < 0) | (key > len(self.df[self.colindex[0]])):
             raise Exception(
                 f"The key is out of range. It should be "
-                + f"positive integer and smaller than {len(self.df[self.colindex[0]])}"
+                + f"positive integer and smaller "
+                + f"than {len(self.df[self.colindex[0]])}"
             )
         else:
             return np.array(self.df[self.colindex[key]])
@@ -257,7 +262,8 @@ class DataFrame:
     # To get the content of one row
     def get_row(self, index):
         if index in self.rowindex:
-            return [self.df[i][self.rowindex.index(index)] for i in self.colindex]
+            r = [self.df[i][self.rowindex.index(index)] for i in self.colindex]
+            return r
         elif isinstance(index, int) is False:
             raise Exception(f"The index should be an integer or a row name.")
         elif (index > len(self.df[self.colindex[0]])) | (index < 0):

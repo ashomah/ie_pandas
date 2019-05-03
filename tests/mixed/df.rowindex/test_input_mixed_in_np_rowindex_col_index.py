@@ -2,11 +2,12 @@ from ie_pandas import DataFrame
 import pytest
 import numpy as np
 
-def test_input_mixed_in_np_rowindex_col_index():
-    obj = np.array([30, 53.0, '31', True, 32])
-    df = DataFrame(obj, colindex = ['AGE'])
 
-    expected_output = ['0', '1', '2', '3', '4']
+def test_input_mixed_in_np_rowindex_col_index():
+    obj = np.array([30, 53.0, "31", True, 32])
+    df = DataFrame(obj, colindex=["AGE"])
+
+    expected_output = ["0", "1", "2", "3", "4"]
 
     actual_output = df.rowindex
 
