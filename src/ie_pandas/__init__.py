@@ -307,20 +307,28 @@ class DataFrame:
                 cols.append(key)
                 mean_col.append(np.mean(copy.df[key]))
         return mean_col
-
+    
     def head(self, n = 5):
         """
         This function returns the first five rows of the df, 
         or when specified differently, the first n rows.
         """
-
         copy = self
         head_df = []
         for key in copy.rowindex:
-            while rowindex < n:
-                head_df.append()
+            while len(head_df) < n:
+                head_df.append(copy.df[key])
 
         return head_df
+    
+    #def head(self, n=6):
+
+        #n = min(n, len(self))
+        #return self[0:n]
+
+    #def tail(self, n=6):
+     #   n = min(n, len(self))
+      #  return self[(len(self)-n):len(self)]
 
 # To indicate the script has been run when importing the package
 print("Done __init__.py")
