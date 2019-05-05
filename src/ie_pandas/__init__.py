@@ -96,7 +96,7 @@ class DataFrame:
         # CONFIGURATE THE DATAFRAME
         #########################################################
 
-        # Check if the input_object if a list
+        # Check if the input_object is a list
         if type(self.df) == list:
             mylist = self.df
             if all(isinstance(j, (int, float, str, bool)) for j in mylist) == True:
@@ -307,19 +307,33 @@ class DataFrame:
                 cols.append(key)
                 mean_col.append(np.mean(copy.df[key]))
         return mean_col
-    
-    def head(self, n = 5):
+
+        def head(self):
         """
         This function returns the first five rows of the df, 
         or when specified differently, the first n rows.
         """
         copy = self
         head_df = []
-        for key in copy.rowindex:
-            while len(head_df) < n:
-                head_df.append(copy.df[key])
+        for i in copy.colindex:
+            a = i
+            head_df.append(a)
+        df = []
+        for i in range(4):
+            for w in head_df:
+                a = copy[w][i]
+                df.append(a)
+            ab = {head_df[0]: df[0], head_df[1]: df[1], head_df[2]: df[2]}
+            print (ab)
+            del df
+            df = []
+            #, n = 5
+        #    while rowindex < n:
+        #        n = min(n, len(self))
+        #        head_df.append(copy.get_row(key))
+        #        i += 1
 
-        return head_df
+        #return head_df
     
     #def head(self, n=6):
 
