@@ -25,7 +25,7 @@ def test_input_mixed_in_list_of_lists_head():
         + "4  32.1   4  e  False"
     )
 
-    actual_output = repr(df.head(200))
+    actual_output = repr(df.head())
 
     assert actual_output == expected_output
 
