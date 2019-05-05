@@ -384,11 +384,40 @@ class DataFrame:
         or when specified differently, the first n rows.
         """
         copy = self
+        mylist = self.df
         head_df = []
-        for key in copy.rowindex:
-            while len(head_df) < n:
-                head_df.append(copy.df[key])
-
+        for i in copy.colindex:
+            a = i
+            head_df.append(a)
+        df = []
+        for w in range(0, len(head_df)):
+            temp_list = []
+            for i in range(0, n):
+                print(temp_list)
+                print(df)
+                temp_list.append(copy.df[w][i])
+            df.append(temp_list)
+            print(df)
+        df = DataFrame(df)
+        print(df)
+        return df
+            
+    def alt_head(self, n = 5):
+        """
+        This function returns the first five rows of the df, 
+        or when specified differently, the first n rows.
+        """
+        copy = self
+        mylist = self.df
+        head_df = []
+        for i in copy.colindex:
+            a = i
+            head_df.append(a)
+        df = []
+        #for w in head_df:
+        for i in range(0, n-1):
+            print(head_df)
+            repr(head_df.append(copy[i]))
         return head_df
     
     #def head(self, n=6):
