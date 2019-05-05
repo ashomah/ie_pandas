@@ -308,22 +308,45 @@ class DataFrame:
                 mean_col.append(np.mean(copy.df[key]))
         return mean_col
 
-        def head(self):
+    #def alt_head(self, n = 5):
+    #    """
+    #    This function returns the first five rows of the df, 
+    #    or when specified differently, the first n rows.
+    #    """
+    #    copy = self
+    #    mylist = self.df
+    #    head_df = []
+    #    for i in copy.colindex:
+    #        a = i
+    #        head_df.append(a)
+    #    df = []
+    #    for w in head_df:
+    #        while int(copy.rowindex[i]) < n:
+    #            repr(head_df.append(copy[w][i]))
+    #            i += 1
+    #    return head_df
+
+    def head(self, n = 5):
         """
         This function returns the first five rows of the df, 
         or when specified differently, the first n rows.
         """
         copy = self
+        mylist = self.df
         head_df = []
         for i in copy.colindex:
             a = i
             head_df.append(a)
         df = []
-        for i in range(4):
+        for i in range(n):
             for w in head_df:
-                a = copy[w][i]
-                df.append(a)
-            ab = {head_df[0]: df[0], head_df[1]: df[1], head_df[2]: df[2]}
+               # count_elements = len(mylist)
+               # while len(list(map(str, range(0, count_elements)))) < (n+1): #copy.rowindex[1]
+                    a = copy[w][i]
+                    df.append(a)
+                    #repr({head_df[i]: df[i]})
+                    #i += 1
+            ab = DataFrame(df, colindex = head_df)
             print (ab)
             del df
             df = []
@@ -333,7 +356,7 @@ class DataFrame:
         #        head_df.append(copy.get_row(key))
         #        i += 1
 
-        #return head_df
+        return head_df
     
     #def head(self, n=6):
 
@@ -343,6 +366,6 @@ class DataFrame:
     #def tail(self, n=6):
      #   n = min(n, len(self))
       #  return self[(len(self)-n):len(self)]
-
-# To indicate the script has been run when importing the package
+      
+#To indicate the script has been run when importing the package
 print("Done __init__.py")
